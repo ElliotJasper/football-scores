@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 
-const { MongoClient, ServerApiVersion, Db } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const games = require('./request');
 const date = require('./getdate');
 
@@ -19,6 +19,7 @@ client.connect(err => {
         awayName: games.game.awayName,
         awayScore: games.game.awayScore,
     }};*/
+    
 
     db.collection('last-man-standing').find(query).toArray((err, result) => {
         if (err) throw err;
