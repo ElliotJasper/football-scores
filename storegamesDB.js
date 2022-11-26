@@ -6,8 +6,8 @@ const games = require('./request');
 const date = require('./getdate');
 
 const URI = 'mongodb+srv://elliotadmin:' + process.env.PASSWORD + '@lastmanstanding.oqj3y.mongodb.net/?retryWrites=true&w=majority';
-// testing compare
-// mongodb+srv://elliotadmin:<password>@lastmanstanding.oqj3y.mongodb.net/?retryWrites=true&w=majority
+
+// Connect to MonogDB
 const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
     if (err) throw (err);
@@ -20,7 +20,7 @@ client.connect(err => {
         awayScore: games.game.awayScore,
     }};*/
     
-
+    // Insert or update documents depending if already exist
     db.collection('last-man-standing').find(query).toArray((err, result) => {
         if (err) throw err;
         if (result.length > 0) {
@@ -38,9 +38,10 @@ client.connect(err => {
                 if (err) throw err;
                 console.log('Document Inserted');
                 client.close();
+        
             })
-
-    }})
+        }
+    })
 });
 
 

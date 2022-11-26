@@ -3,30 +3,32 @@ date_ob = new Date();
 // Format Date For API URL
 // Get current dates
 const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+// Date object returns the day as a integer from 0-6, so find this index in a array of days. 
 let day = weekday[date_ob.getDay()];
 
-let date = date_ob.getDate();
-let month = date_ob.getMonth() + 1;
-let year = date_ob.getFullYear();
-let monthName = date_ob.toLocaleString("default", { month: "long" });
+let date = date_ob.getDate(); // Day as an integer
+let month = date_ob.getMonth() + 1; // Month as integer
+let year = date_ob.getFullYear(); // Year as integer
+let monthName = date_ob.toLocaleString("default", { month: "long" }); // Month as string
 
-// Format Date For JSON Path
-// Wednesday-23rd-February
-date = date.toString();
-let dateFinalDigit = date.slice(-1);
-let dateFinish = '';
-
+// Format Dates For JSON Path
+// If month is 1 digit, add 0 to beginning, so 1 becomes 01 (for the API path to work)
 month = month.toString();
 if (month.length == 1) {
     month = '0' + month;
 }
-let dateTwo;
+
+// Do same for date, so 1 becomes 01 etc
 date = date.toString();
 if (date.length == 1) {
-    dateTwo = '0' + date;
-} else dateTwo = date
+    date = '0' + date;
+} 
 
-// Format date to have 1st 2nd 3rd or th endings on day.
+// Format date to end in (st), (nd), (rd), or (th) depending on final number.
+let dateFinalDigit = date.slice(-1);
+let dateFinish = '';
+
 switch (dateFinalDigit) {
     case '1': dateFinish = 'st';
     break;
@@ -40,9 +42,12 @@ switch (dateFinalDigit) {
     default: dateFinish ='th'
 }
 let dayComplete = date + dateFinish;
-console.log(dayComplete);
+
+// Formate the dates for the API URL and the path for finding scores
+// Export
 let x = module.exports.formatDatePath = day + '-' + dayComplete + '-' + monthName;
-let y = module.exports.formatDateAPI = year + '-' + month + '-' + dateTwo;
+let y = module.exports.formatDateAPI = year + '-' + month + '-' + date;
+
 console.log(x);
 console.log(y);
 

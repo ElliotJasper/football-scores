@@ -16,13 +16,16 @@ fetch(requestURL)
     let allTeam = [];
     let leagueRoute = data.payload[0].body.matchData;
 
-    // Loop through object to find premier league games only
-    //console.log(leagueRoute);
+    // Loop through object to find (a specific league) games only
     for (i = 0; i < leagueRoute.length; i++) {
       if (leagueRoute[i].tournamentMeta.tournamentSlug == "world-cup") {
         let leagueRouteLocal = leagueRoute[i];
         let scorePath = leagueRouteLocal.tournamentDatesWithEvents[formatDatePath];
-        scorePath = scorePath[0].events; //Different for world cup, not just [0], differen number for each
+        scorePath = scorePath[0].events; //Different for world cup, not just [0], different number for each
+        
+        // Loop through the events to get info of all games
+        // Store in objects
+        // Push to array which will be used to add to database
         for (i = 0; i < scorePath.length; i++) {
           let game = {
             date: formatDateAPI,
@@ -46,8 +49,9 @@ fetch(requestURL)
             result: scorePath[i].awayTeam.eventOutcome,
             league: leagueRouteLocal.tournamentMeta.tournamentSlug,
           };
-          allTeam.push(homeTeam, awayTeam);
           
+          // Export arrays
+          allTeam.push(homeTeam, awayTeam);
           console.log(game);
           allScores.push(game);
           module.exports.allScores = allScores;

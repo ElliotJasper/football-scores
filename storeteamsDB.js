@@ -8,11 +8,13 @@ const URI = 'mongodb+srv://elliotadmin:' + process.env.PASSWORD + '@lastmanstand
 
 const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+// Connect to MongoDB
 client.connect(err => {
     if (err) throw err;
     let db = client.db('lastmanstanding-scores');
     let query = { date: date.formatDateAPI };
 
+    // Insert or update documents depending if already exist
     db.collection('singleteam').find(query).toArray((err, result) => {
         if (err) throw err;
         if (result.length > 0) {
@@ -33,8 +35,4 @@ client.connect(err => {
             });
         }
     })
-    
-    
-    
-
 });
