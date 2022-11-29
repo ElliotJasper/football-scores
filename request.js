@@ -22,7 +22,7 @@ fetch(requestURL)
         let leagueRouteLocal = leagueRoute[i];
         let scorePath = leagueRouteLocal.tournamentDatesWithEvents[formatDatePath];
         scorePath = scorePath[0].events; //Different for world cup, not just [0], different number for each
-        
+
         // Loop through the events to get info of all games
         // Store in objects
         // Push to array which will be used to add to database

@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { MongoClient, ServerApiVersion, Db } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const games = require('./request');
 const date = require('./getdate');
 
