@@ -41,7 +41,7 @@ app.get('/api/info/:homeName', (req, res ) => {
         console.log(response)
         const awayNameArray = []
         for(i=0;i<response.length;i++) {
-            awayNameArray.push(response[i].awayName);
+            awayNameArray.push(response[i].homeName, response[i].homeScore, response[i].awayName, response[i].awayScore)
         }
         res.json(awayNameArray)
         res.end()

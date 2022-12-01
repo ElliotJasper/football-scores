@@ -18,16 +18,19 @@ month = month.toString();
 if (month.length == 1) {
     month = '0' + month;
 }
+let dateFinalDigit;
 
-// Do same for date, so 1 becomes 01 etc
+// If date is 1 digit, do nothing, if 2 digit, get the final digit.
 date = date.toString();
 if (date.length == 1) {
-    date = '0' + date;
-} 
+    dateFinalDigit = date
+} else {
+    dateFinalDigit = date.slice(-1);
+}
 
 // Format date to end in (st), (nd), (rd), or (th) depending on final number.
-let dateFinalDigit = date.slice(-1);
-let dateFinish = '';
+
+let dateFinish;
 
 switch (dateFinalDigit) {
     case '1': dateFinish = 'st';

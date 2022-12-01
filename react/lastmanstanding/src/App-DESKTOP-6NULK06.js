@@ -8,9 +8,9 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('/api/info/Netherlands');
+      const result = await axios('/api/info/');
       setData(result.data);
-      console.log(result.data);
+      console.log(result);
     };
 
     fetchData();
